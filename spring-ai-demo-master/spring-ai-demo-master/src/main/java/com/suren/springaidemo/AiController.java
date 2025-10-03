@@ -19,9 +19,9 @@ public class AiController {
         this.imageService = imageService;
     }
 
-    @GetMapping("generate-image")
-    public void generateImage(HttpServletResponse response, @RequestParam("prompt") String prompt) throws IOException {
-        ImageResponse imageResponse = imageService.generateImage(prompt);
+    @GetMapping("create-image")
+    public void createImage(HttpServletResponse response, @RequestParam("image") String image) throws IOException {
+        ImageResponse imageResponse = imageService.createImage(image);
 
         // Get URL of the generated image
         String imageUrl = imageResponse.getResult().getOutput().getUrl();
@@ -30,15 +30,15 @@ public class AiController {
         response.sendRedirect(imageUrl);
     }
 
-    @GetMapping("ask-ai")
+    @GetMapping("ask-the-ai")
     public String askAi(@RequestParam("prompt") String prompt){
-    	//System.out.println("Prompt: " +prompt);
-        return chatService.queryAi(prompt);
+    	System.out.println("Prompt: " +prompt);
+        return chatService.askAI(prompt);
     }
 
 
-    @GetMapping("city-guide")
-    public String cityGuide(@RequestParam("city") String city, @RequestParam("interest") String interest) {
-        return chatService.getCityGuide(city, interest);
+    @GetMapping("country-guide")
+    public String countryGuide(@RequestParam("country") String country) {
+        return chatService.countryGuide(country);
     }
 }
