@@ -12,7 +12,7 @@ public class ImageService {
         this.imageClient = imageClient;
     }
 
-    public ImageResponse generateImage(String prompt) {
+    public ImageResponse createImage(String prompt) {
         ImageOptions imageOptions = ImageOptionsBuilder.builder()
                 .withN(1) //Number of images to be generated
                 .withHeight(1024)
