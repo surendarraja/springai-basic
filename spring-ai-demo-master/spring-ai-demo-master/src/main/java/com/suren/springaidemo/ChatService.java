@@ -16,7 +16,7 @@ public class ChatService {
         this.chatClient = chatClient;
     }
 
-    public String queryAi(String prompt) {
+    public String askAI(String prompt) {
     	try {
     		System.out.println("Prompt: " +prompt);
             return chatClient.call(prompt);
@@ -28,15 +28,15 @@ public class ChatService {
     	
     }
 
-    public String getCityGuide(String city, String interest) {
+    public String countryGuide(String country) {
         var template = """
-                I am a tourist visiting the city  {city}.
-                I am  interested in {interest}.
-                Give me tips on what to do there.""";
+                I want to visit the country  {country}.
+                Tell me the top 3  places to visit.
+                """;
 
         PromptTemplate promptTemplate = new PromptTemplate(template);
 
-        Map<String, Object> params = Map.of("city", city, "interest", interest);
+        Map<String, Object> params = Map.of("country", country);
         Prompt prompt = promptTemplate.create(params);
 
         return chatClient.call(prompt).getResult().getOutput().getContent();
